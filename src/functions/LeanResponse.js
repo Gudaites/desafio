@@ -1,6 +1,6 @@
 import cheerio from 'cheerio';
 
-const LeanResponse = async html => {
+async function LeanResponse(html) {
   const $ = await cheerio.load(html);
   const cobranca = $('.tarifas-2-1-2').text();
   const transferencia = $('.tarifas-2-2-2').text();
@@ -10,6 +10,7 @@ const LeanResponse = async html => {
     return { error: 'Nenhuma informação de plano profissional encontrada.' };
   }
 
+  // Formata Strings
   const cobrancaFormatada = cobranca.trimLeft().trimRight();
   const transferenciaFormatada = transferencia.trimLeft().trimRight();
   const mensalidadeFormatada = mensalidade
@@ -25,6 +26,6 @@ const LeanResponse = async html => {
       mensalidade: mensalidadeFormatada,
     },
   };
-};
+}
 
 export default LeanResponse;
